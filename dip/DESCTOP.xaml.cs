@@ -17,6 +17,12 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.IO;
 using static System.Net.Mime.MediaTypeNames;
+using System;
+using System.Drawing;
+using System.Collections;
+using System.ComponentModel;
+using System.Data;
+using MessageBox = HandyControl.Controls.MessageBox;
 
 
 namespace dip
@@ -26,8 +32,8 @@ namespace dip
     /// </summary>
     public partial class DESCTOP : Page
     {
-       
 
+     
         public DESCTOP()
         {
       
@@ -36,20 +42,19 @@ namespace dip
          
         private void Button_Click1(object sender, RoutedEventArgs e)
         {
-            
-
-            string path = "C:\\path\\to\\file\\file.txt";
-            string directoryPath = Path.GetDirectoryName(path);
-
-            Console.WriteLine(directoryPath);
-
-
-
             OpenFileDialog ofd = new OpenFileDialog();
             ofd.ShowDialog();
-            string[] path =ofd.FileNames;
+          //  string[] path1 = ofd.FileName;
+             string path = ofd.FileName;
+            string directoryPath = System.IO.Path.GetDirectoryName( Convert.ToString(path));
+
+            Console.WriteLine(directoryPath);
+            RES.Text = directoryPath;
+
+
+           
             //DirectoryInfo directory = new DirectoryInfo(path);
-            
+
             //path = path.Substring(0, path.Length - path.Length);
             //var my = Convert.ToString(directory.FullName);
             Console.WriteLine("Selected file: " + path);
@@ -60,6 +65,8 @@ namespace dip
             //{
             //    my = ofd.FileName;
             //}
+
+
         }
     }
 }

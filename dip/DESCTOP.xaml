@@ -8,9 +8,9 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="DESCTOP">
 
-    <Grid Background="Aqua">
-        <Button Content="" HorizontalAlignment="Left" Margin="246,158,0,0" VerticalAlignment="Top" Click="Button_Click1" Height="18" Width="14"/>
-        <TextBlock HorizontalAlignment="Left" Margin="76,124,0,0" TextWrapping="Wrap" Text="Укажите папку, которую хотите сохранить" VerticalAlignment="Top"/>
-        <TextBox x:Name="RES" HorizontalAlignment="Left" Margin="126,158,0,0" TextWrapping="Wrap" Text="Путь к файлу" VerticalAlignment="Top" Width="120" FontSize="10" FontFamily="Candara Light" Height="18"/>
+    <Grid Background="{DynamicResource {x:Static SystemColors.ActiveCaptionTextBrushKey}}" OpacityMask="{DynamicResource {x:Static SystemColors.ActiveCaptionTextBrushKey}}">
+        <Button Content="" HorizontalAlignment="Left" Margin="126,158,0,0" VerticalAlignment="Top" Click="Button_Click1" Height="18" Width="134" BorderBrush="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}" Background="{DynamicResource {x:Static SystemColors.ActiveCaptionTextBrushKey}}"/>
+        <TextBlock HorizontalAlignment="Left" Margin="76,124,0,0" TextWrapping="Wrap" Text="Укажите папку, которую хотите сохранить" VerticalAlignment="Top" Foreground="White"/>
+        <TextBox x:Name="RES" HorizontalAlignment="Left" Margin="126,158,0,0" TextWrapping="Wrap" Text="Путь к файлу" VerticalAlignment="Top" Width="120" FontSize="10" FontFamily="Candara Light" Height="18" SelectionBrush="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}" Background="{DynamicResource {x:Static SystemColors.ActiveCaptionTextBrushKey}}" SelectionTextBrush="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}" Foreground="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}"/>
     </Grid>
 </Page>
