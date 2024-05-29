@@ -23,6 +23,13 @@ using System.Collections;
 using System.ComponentModel;
 using System.Data;
 using MessageBox = HandyControl.Controls.MessageBox;
+using Xceed.Wpf.Toolkit;
+using System.Net.Sockets;
+using System.Net;
+using System.Net;
+using System.Net.Sockets;
+using System.Text;
+
 
 
 namespace dip
@@ -32,12 +39,16 @@ namespace dip
     /// </summary>
     public partial class DESCTOP : Page
     {
-
-     
+        IPEndPoint ipPoint = new IPEndPoint(IPAddress.Any, 8888);
+        Socket tcpListener = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+        public DateTime SelectedDate
+        {
+            get; set;}
         public DESCTOP()
         {
       
             InitializeComponent();
+            this.DataContext = this;
         }
          
         private void Button_Click1(object sender, RoutedEventArgs e)
@@ -67,6 +78,44 @@ namespace dip
             //}
 
 
+        }
+
+        private async Task Button_ClickAsync(object sender, RoutedEventArgs e)
+        {
+            IPEndPoint ipPoint = new IPEndPoint(IPAddress.Any, 8888);
+            Socket tcpListener = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+
+            try
+            {
+                tcpListener.Bind(ipPoint);
+                tcpListener.Listen();    // запускаем сервер
+                Console.WriteLine("Сервер запущен. Ожидание подключений... ");
+
+                while (true)
+                {
+                    // получаем подключение в виде TcpClient
+                     var tcpClient = await tcpListener.AcceptAsync();
+                    // определяем буфер для получения данных
+                    List<byte> response = [];
+                    byte[] buffer = new byte[512];
+                    int bytes = 0; // количество считанных байтов
+                                   // считываем данные 
+                    do
+                    {
+                        bytes = await tcpClient.ReceiveAsync(buffer);
+                        // добавляем полученные байты в список
+                        response.AddRange(buffer.Take(bytes));
+                    }
+                    while (bytes > 0);
+                    // выводим отправленные клиентом данные
+                    var responseText = Encoding.UTF8.GetString(response.ToArray());
+                    Console.WriteLine(responseText);
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
         }
     }
 }
